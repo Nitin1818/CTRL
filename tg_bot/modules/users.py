@@ -58,7 +58,7 @@ def broadcast(bot: Bot, update: Update):
         failed = 0
         for chat in chats:
             try:
-                bot.sendMessage(int(chat.chat_id), to_send[1])
+                bot.sendMessage(int(chat.chat_id), to_send[1], parse_mode="markdown")
                 sleep(0.1)
             except TelegramError:
                 failed += 1
