@@ -1,12 +1,4 @@
 {
-   "addons": [
-      {
-         "options": {
-            "version": "9.5"
-         },
-         "plan": "heroku-postgresql"
-      }
-   ],
    "description": "Modular Telegram bot for managing your groups with a few extras!",
    "env": {
       "ALLOW_EXCL": {
@@ -48,6 +40,11 @@
          "description": "Your username",
          "value": "refundisillegal"
       },
+      "DATABASE_URL": {
+         "description": "Put down ur sql db url here that ur got from elephant sql",
+         "required": true,
+         "value": ""
+      },
       "PORT": {
          "description": "Port to use for your webhooks.",
          "required": false,
@@ -67,11 +64,6 @@
       },
       "TOKEN": {
          "description": "Your bot token.",
-         "value": ""
-      },
-      "URL": {
-         "description": "The Heroku App URL :-  https://<appname>.herokuapp.com/",
-         "required": false,
          "value": ""
       },
       "WEBHOOK": {
