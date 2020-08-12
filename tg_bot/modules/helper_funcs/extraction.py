@@ -54,7 +54,7 @@ def extract_user_and_text(message: Message, args: List[str]) -> (Optional[int], 
             return None, None
 
         else:
-            user_id = user_id
+            user_id = user_id or user.id
             res = message.text.split(None, 2)
             if len(res) >= 3:
                 text = res[2]
@@ -116,12 +116,12 @@ def extract_unt_fedban(message: Message, args: List[str]) -> (Optional[int], Opt
         user = args[0]
         user_id = get_user_id(user)
         if not user_id and not str(user_id).isdigit():
-            message.reply_text("Saya tidak memiliki pengguna di db saya. Anda akan dapat berinteraksi dengan mereka jika "
-                               "Anda membalas pesan orang itu, atau meneruskan salah satu dari pesan pengguna itu.")
+            message.reply_text("I don't have any users on my db. You will be able to interact with them if "
+                               "You reply to that person's message, or forward one of that user's messages.")
             return None, None
 
         else:
-            user_id = user_id
+            user_id = user_id or user.id
             res = message.text.split(None, 2)
             if len(res) >= 3:
                 text = res[2]
@@ -142,9 +142,9 @@ def extract_unt_fedban(message: Message, args: List[str]) -> (Optional[int], Opt
         message.bot.get_chat(user_id)
     except BadRequest as excp:
         if excp.message in ("User_id_invalid", "Chat not found") and not str(user_id).isdigit():
-            message.reply_text("Saya sepertinya tidak pernah berinteraksi dengan pengguna ini sebelumnya - silakan meneruskan pesan dari "
-                               "mereka untuk memberi saya kontrol! (Seperti boneka voodoo, saya butuh sepotong untuk bisa"
-                               "untuk menjalankan perintah tertentu...)")
+            message.reply_text("I don't seem to have interacted with this user before - please forward a message from "
+                               "them to give me control! (Like a voodoo doll, I need a piece to be able to"
+                               "to carry out certain commands...)")
             return None, None
         elif excp.message != "Chat not found":
             LOGGER.exception("Exception %s on user %s", excp.message, user_id)
